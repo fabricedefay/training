@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class WelcomePage {
 	
-	String[] userType = {"Librarian", "Administrator"/*, "Borrower"*/}; //add more if program expand
+	String[] userType = {"Librarian", "Administrator", "Borrower"}; //add more if program expand
 	
 	Connection conn = null;
 	
@@ -39,6 +39,7 @@ public class WelcomePage {
 		for(int i = 1; i <= userType.length; i++){
 			System.out.println(i + ") " + userType[i-1]);
 		}
+		System.out.println("0) Quit Application");
 		choice =  sc.nextLine();
 		beginAction(choice);
 	}
@@ -48,16 +49,26 @@ public class WelcomePage {
 		switch (choice){
 		case "1":
 			new Librarian(conn);
+			this.endProgram();
 			break;
 		case "2":
 			new Administrator(conn);
 			break;
-		/*case "3":
-			new Borrower();
-			break; */
+		case "3":
+			new Borrower(conn);
+			break;
+		case "0":
+			endProgram();
+			break;
 			default:
 				askUserType();			
 		}
+	}
+
+	private void endProgram() {
+		System.out.println("Goodbye!");
+		System.exit(0);
+		
 	}
 
 }
